@@ -4,6 +4,19 @@ import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.Method.HEAD
 import static groovyx.net.http.ContentType.TEXT
 
+DOC_DATE="31 January 2012"
+PRODUCT="13"
+SPEC="EmotionML 1.0"
+SPEC_LONG="Emotion Markup Language (EmotionML) 1.0"
+SPEC_URL="http://www.w3.org/TR/2011/WD-emotionml-20110407/"
+SPEC_MATURITY="Last Call Working Draft"
+PERIOD_START="7 April 2011"
+PERIOD_END="7 June 2011"
+EDITOR="Marc Schroeder, DFKI GmbH"
+WORKING_GROUP="Multimodal Interaction"
+ACTIVITY_URL="http://www.w3.org/2002/mmi/"
+PUBLIC_MAILING_LIST="www-multimodal@w3.org"
+PUBLIC_ARCHIVE_URL="http://lists.w3.org/Archives/Public/www-multimodal/"
 
 def checkPublic(url){
     // return true
@@ -37,14 +50,15 @@ def today= new Date() //represents the date and time when it is created
 def ir = new XmlSlurper().parse(args[0])
 
 def allIssues = ir.issues.issue
-def ccxmlIssues = ir.issues.issue.findAll{it.product.text()=="2"}
-def publicIssues = ir.issues.issue.findAll{it.product.text()=="2" && it.title.text().contains('PUBLIC')}
-def lcwdIssues = ir.issues.issue.findAll{it.product.text()=="2" && it.title.text().contains('LCWD')}
+def specIssues = ir.issues.issue.findAll{it.product.text()==PRODUCT}
+def publicIssues = ir.issues.issue.findAll{it.product.text()==PRODUCT && it.title.text().contains('PUBLIC')}
+def lcwdIssues = ir.issues.issue.findAll{it.product.text()==PRODUCT && it.title.text().contains('LCWD')}
 def pubOrlcwdIssues = ir.issues.issue.findAll {
-            it.product.text()=="2" && 
+            it.product.text()==PRODUCT && 
             (it.title.text().contains('LCWD') || it.title.text().contains('PUBLIC'))
 }
-def issueSet = pubOrlcwdIssues
+// def issueSet = pubOrlcwdIssues
+def issueSet = specIssues
 
 StringWriter writer = new java.io.StringWriter()
 
@@ -54,7 +68,7 @@ head {
     
     
     
-    title "CCXML 1.0: Last Call Working Draft Disposition of Comments"
+    title SPEC + ": " + SPEC_MATURITY + " Disposition of Comments"
 
     link( rel:"stylesheet", type:"text/css",href:"http://www.w3.org/StyleSheets/general.css")
     style(type:"text/css", '''  
@@ -96,40 +110,41 @@ div class:"head", {
         a href:"",""
     }
     
-    h1 id:"title", style:"text-align: center", 'CCXML 1.0: Last Call Working Draft Disposition of Comments'
+    h1 id:"title", style:"text-align: center", SPEC + ': ' + SPEC_MATURITY + ' Disposition of Comments'
     
     dl {
         dt "This version"
         dd "${today}"
         dt "Editor"
-        dd "RJ Auburn, Voxeo"
+        dd EDITOR
     }
     
 }
 
 h2 "Abstract"
 p {
-    mkp.yield 'This document details the responses made by the Voice Browser '
-    mkp.yield 'Working Group to issues raised during the '
+    mkp.yield 'This document details the responses made by the '
+    mkp.yield WORKING_GROUP
+    mkp.yield ' Working Group to issues raised during the '
     a href:"http://www.w3.org/2004/02/Process-20040205/tr.html#cfi","Last Call Working Draft"
-    mkp.yield ' period (beginning XXX and ending XXX).'
-    a href:"mailto:www-voice-request@w3.org","www-voice-request@w3.org"
-    mkp.yield "("
-    a href:"http://lists.w3.org/Archives/Public/www-voice/", "archive"
+    mkp.yield ' period (beginning ' + PERIOD_START +' and ending ' + PERIOD_END + ').'
+    a href:"mailto:"+PUBLIC_MAILING_LIST,PUBLIC_MAILING_LIST
+    mkp.yield " (with public"
+    a href:PUBLIC_ARCHIVE_URL, "archive"
     mkp.yield ") mailing list."
 }
 
 h2 "Status"
 p {
-    mkp.yield 'This document of the W3C\'s Voice Browser Working Group describes the disposition '
-    mkp.yield 'of comments as of XXXX on the '
-    a href:"http://www.w3.org/TR/2007/WD-ccxml-20070119//", "Last Call Working Draft Voice Browser Call Control XML (CCXML) Version 1.0."
-    mkp.yield 'It may be updated, replaced or rendered obsolete by other W3C documents at any time.'    
+    mkp.yield 'This document of the W3C\'s ' + WORKING_GROUP + ' Working Group describes the disposition '
+    mkp.yield 'of comments as of ' + DOC_DATE + ' on the '
+    a href:SPEC_URL, SPEC_LONG + '.'
+    mkp.yield ' It may be updated, replaced or rendered obsolete by other W3C documents at any time.'    
 }
 
 p {
     mkp.yield 'For background on this work, please see the '
-    a href:"http://www.w3.org/Voice/Activity", "Voice Browser Activity Statement."
+    a href:ACTIVITY_URL, WORKING_GROUP + " Activity Statement."
 }
 
 

@@ -1,0 +1,15 @@
+This tool helps W3C spec writers produce a Disposition of Comments from a W3C Tracker.
+
+Partial summary of steps:
+
+1. Export the tracker data in XML format: If the tracker is at https://example.com/track/, export it as https://example.com/track/api/dump
+
+2. Place the entire xml dump into file "ir.xml" in the current directory.
+
+3. Adapt the settings in run.sh and W3C_Tracker_XML_DoC.groovy to match your spec.
+
+4. Run run.sh. Upon success, you will see (on a mac, at least) the generated html file in your browser.
+
+5. Iterate until satisfied.
+
+6. Do the rest by hand.
