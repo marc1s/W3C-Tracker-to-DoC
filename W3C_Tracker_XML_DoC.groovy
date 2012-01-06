@@ -63,10 +63,11 @@ def issueSet = specIssues
 StringWriter writer = new java.io.StringWriter()
 
 def build = new groovy.xml.MarkupBuilder(writer)
+build.getMkp().pi("xml":[version:"1.0", encoding:"utf-8"])
 build.html {
 head {
     
-    
+    meta('http-equiv':"content-type", content:"text/html; charset=UTF-8")
     
     title SPEC + ": " + SPEC_MATURITY + " Disposition of Comments"
 
@@ -110,15 +111,39 @@ div class:"head", {
         a href:"",""
     }
     
-    h1 id:"title", style:"text-align: center", SPEC + ': ' + SPEC_MATURITY + ' Disposition of Comments'
-    
+    h1 id:"title", SPEC + ': ' + SPEC_MATURITY + ' Disposition of Comments'
+    h2 DOC_DATE
     dl {
-        dt "This version"
-        dd "${today}"
         dt "Editor"
         dd EDITOR
     }
     
+    p class:"copyright", {
+      a href:"http://www.w3.org/Consortium/Legal/ipr-notice#Copyright", "Copyright"
+      mkp.yield ' © 2012'
+      a href:"http://www.w3.org/", {
+        abbr title:"World Wide Web Consortium", "W3C"
+      }
+      sup '®'
+      mkp.yield ' ('
+      a href:"http://www.csail.mit.edu/", {
+        abbr title:"Massachusetts Institute of Technology", "MIT"
+      }
+      mkp.yield ','
+      a href:"http://www.ercim.org/", {
+        acronym title:"European Research Consortium for Informatics and Mathematics", 'ERCIM'
+      }
+      mkp.yield ','
+      a href:"http://www.keio.ac.jp/", 'Keio'
+      mkp.yield '), All Rights Reserved. W3C'
+      a href:"http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer", "liability"
+      mkp.yield ','
+      a href:"http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks", "trademark"
+      mkp.yield ','
+      a href:"http://www.w3.org/Consortium/Legal/copyright-documents-19990405", "document use"
+      mkp.yield ' rules apply.'
+    }
+    hr {}
 }
 
 h2 "Abstract"
@@ -127,19 +152,19 @@ p {
     mkp.yield WORKING_GROUP
     mkp.yield ' Working Group to issues raised during the '
     a href:"http://www.w3.org/2004/02/Process-20040205/tr.html#cfi","Last Call Working Draft"
-    mkp.yield ' period (beginning ' + PERIOD_START +' and ending ' + PERIOD_END + ').'
+    mkp.yield ' period (beginning ' + PERIOD_START +' and ending ' + PERIOD_END + '). Comments were provided by other W3C Working Groups and the public via the'
     a href:"mailto:"+PUBLIC_MAILING_LIST,PUBLIC_MAILING_LIST
-    mkp.yield " (with public"
+    mkp.yield " ("
     a href:PUBLIC_ARCHIVE_URL, "archive"
-    mkp.yield ") mailing list."
+    mkp.yield " ) mailing list."
 }
 
 h2 "Status"
 p {
     mkp.yield 'This document of the W3C\'s ' + WORKING_GROUP + ' Working Group describes the disposition '
-    mkp.yield 'of comments as of ' + DOC_DATE + ' on the '
-    a href:SPEC_URL, SPEC_LONG + '.'
-    mkp.yield ' It may be updated, replaced or rendered obsolete by other W3C documents at any time.'    
+    mkp.yield 'of comments as of ' + DOC_DATE + ' on the ' + SPEC_MATURITY + ' of the '
+    a href:SPEC_URL, SPEC_LONG
+    mkp.yield '. It may be updated, replaced or rendered obsolete by other W3C documents at any time.'    
 }
 
 p {
