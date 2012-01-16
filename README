@@ -2,7 +2,7 @@ This tool helps W3C spec writers produce a Disposition of Comments from a W3C Tr
 
 Partial summary of steps:
 
-1. Export the tracker data in XML format: If the tracker is at https://example.com/track/, export it as https://example.com/track/api/dump
+1. Export the tracker data in XML format: If the tracker is at https://example.com/track/, export it as https://example.com/track/api/dump?full
 
 2. Place the entire xml dump into file "ir.xml" in the current directory.
 
