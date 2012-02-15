@@ -86,16 +86,10 @@ head {
     .ACCEPTED {  
         background-color: Aquamarine 
     }  
-    .TEXTSUPERSEDED {  
-        background-color: LightSkyBlue  
-    }  
-    .CLARIFICATION {  
-        background-color: DarkSeaGreen   
-    }  
-    .DROPPED  {  
+    .REJECTED  {  
         background-color: Yellow    
     }  
-    .REASSIGNEDID {  
+    .DEFERRED {  
         background-color: Gainsboro 
     }  
     ''')  
@@ -182,20 +176,12 @@ table border:"1", {
         td 'class':"ACCEPTED", "Comment was accepted"
     }
     tr {
-        td 'class':"TEXTSUPERSEDED", "TEXTSUPERSEDED"
-        td 'class':"TEXTSUPERSEDED", "Text that was commented on had already been changed."
+        td 'class':"REJECTED", "REJECTED"
+        td 'class':"REJECTED", "Comment was rejected by working group."
     }
     tr {
-        td 'class':"CLARIFICATION", "CLARIFICATION"
-        td 'class':"CLARIFICATION", "Comment only required a clarification."
-    }
-    tr {
-        td 'class':"DROPPED", "DROPPED"
-        td 'class':"DROPPED", "Feature in question was removed from the spec."
-    }
-    tr {
-        td 'class':"REASSIGNEDID", "REASSIGNEDID"
-        td 'class':"REASSIGNEDID", "Issue number was changed to a new ID"
+        td 'class':"DEFERRED", "DEFERRED"
+        td 'class':"DEFERRED", "Comment was deferred to a future version of the spec."
     }
 }
 p "Results:" 

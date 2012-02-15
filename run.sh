@@ -2,7 +2,7 @@
 GROOVY=groovy
 #GROOVY=~/bin/groovy-1.6.4/bin/groovy
 
-SPEC=CCXML
+SPEC=EmotionML
 OUTFILE=${SPEC}_DoC-`date +%Y-%m-%d`.html
 
 
